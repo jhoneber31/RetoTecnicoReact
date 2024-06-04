@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom"
-import { sidebarContext } from "../../hooks/sidebarContext";
+import { sidebarContext } from "../context/sidebar/sidebarContext";
 
 export const Sidebar = () => {
   const {valueSidebar, handleSidebar} = useContext(sidebarContext);

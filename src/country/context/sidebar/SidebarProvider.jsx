@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { sidebarContext } from "./sidebarContext";
 
 
+// eslint-disable-next-line react/prop-types
 export const SidebarProvider = ({children}) => {
 
   const [valueSidebar, setValueSidebar] = useState(false);

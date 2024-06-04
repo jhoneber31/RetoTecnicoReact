@@ -1,11 +1,17 @@
+import { SearchBox, Sidebar } from "./country/components"
+import { SidebarProvider } from "./country/context/sidebar/SidebarProvider"
 import { AppRouter } from "./router/AppRouter"
 
 function App() {
 
   return (
-    <>
-      <AppRouter/>
-    </>
+    <SidebarProvider>
+      <Sidebar/>
+      <div className="home lg:pl-64 pt-[80px]">
+        <SearchBox/>
+        <AppRouter/>
+      </div>
+    </SidebarProvider>
   )
 }
 
