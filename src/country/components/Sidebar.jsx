@@ -13,14 +13,10 @@ export const Sidebar = () => {
         <div className="h-full px-3 py-4 overflow-y-auto">
           <div className="flex flex-col">
             <h3 className="text-[18px] font-bold p-2">Country App</h3>
-            <NavLink className="p-2 rounded-lg hover:bg-gray-700 group">
+            <NavLink
+              to="/" 
+              className={({isActive}) => isActive ? "p-2 rounded-lg bg-slate-700 group text-white" : "p-2 rounded-lg hover:bg-gray-700 group"}>
               Por Capital
-            </NavLink>
-            <NavLink className="p-2 rounded-lg hover:bg-gray-700 group">
-              Por País
-            </NavLink>
-            <NavLink className="p-2 rounded-lg hover:bg-gray-700 group">
-              Por Región
             </NavLink>
           </div>
         </div>

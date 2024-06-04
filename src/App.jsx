@@ -7,7 +7,7 @@ function App() {
   return (
     <SidebarProvider>
       <Sidebar/>
-      <div className="home lg:pl-64 pt-[80px]">
+      <div className="home lg:pl-64 pt-[80px] relative">
         <SearchBox/>
         <AppRouter/>
       </div>

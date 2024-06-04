@@ -8,7 +8,34 @@ const GET_COUNTRIES_BY_CONTINENT = gql`
   query GetCountriesByContinent($codeContinent: String!) {
     countries(filter: {continent: {in: [$codeContinent]}}) {
       name
+      code
       continent {
+        name
+      }
+    }
+  }
+`
+
+export const GET_COUNTRY_BY_CODE = gql`
+  query GetCountryByCode($codeC: ID!) {
+    country(code: $codeC) {
+      name
+      capital
+      code
+      continent {
+        name
+      }
+      currencies
+      phone
+      native
+      awsRegion
+      languages{
+        name
+      }
+      states{
+        name
+      }
+      subdivisions {
         name
       }
     }
@@ -21,12 +48,14 @@ export const CountryProvider = ({children}) => {
   const [codeContinent, setCodeContinent] = useState("SA");
   const [countriesByCont, setCountriesByCont] = useState([]);
 
-  const {data, error, loading} = useQuery(GET_COUNTRIES_BY_CONTINENT, { variables: {codeContinent}});
+  const resultCountries = useQuery(GET_COUNTRIES_BY_CONTINENT, { variables: {codeContinent}});
+
 
   const { getFlagByName, getImageCityByName } = getImageByName();
 
 
   const getCountries = async () => {
+    const {data} = resultCountries;
     if (data) {
       const promise = data.countries.map(async(country) => {
         const flag = await getFlagByName(country.name);
@@ -39,15 +68,25 @@ export const CountryProvider = ({children}) => {
     }
   }
 
+  const getCountryInfo =async(name) => {
+    const flag = await getFlagByName(name);
+    const city = await getImageCityByName(name);
+    const result = {flag, city}
+    return result;
+  }
+
+  const handleContinet = (code) => {
+    setCodeContinent(code);
+  }
+
+
   useEffect(() => {
     getCountries();
-  }, [data])
+  }, [resultCountries.data, codeContinent])
   
 
-
-
   return (
-    <countryContext.Provider value={{codeContinent}}>
+    <countryContext.Provider value={{countriesByCont, getCountryInfo, handleContinet }}>
       {children}
     </countryContext.Provider>
   )
