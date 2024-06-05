@@ -39,7 +39,7 @@ export const CountryPage = () => {
           <div className="col-span-1">
             <img src={country.city} alt="country-city" className='rounded-t-lg max-h-[248px] bg-cover md:rounded-bl-lg md:rounded-tr-none md:max-h-full md:h-full'/>
           </div>
-          <div className="col-span-1">
+          <div className="col-span-1 lg:px-10 lg:py-5">
             <div className="flex gap-x-2 w-full items-center border-2 border-y-gray-500 px-2 md:border-none md:pt-2">
               <img src={country.flag} alt="country-flag" className="w-[60px] h-[40px] object-cover lg:w-[120px] lg:h-[80px]" />
               <div>

@@ -64,7 +64,7 @@ export const SearchBox = () => {
               <input 
                 name='search'
                 type="text" 
-                className="w-full py-2 px-4 text-green-dark placeholder-green-dark rounded-lg border-2 border-[#000] focus:border-green-dark bg-transparent relative z-10"
+                className="w-full py-2 px-4 text-green-dark placeholder-green-dark rounded-lg border-2 border-[#929292] focus:border-[#929292] bg-transparent relative z-10 focus-visible:border-[#929292]"
                 placeholder='Nombre del país'
                 onClick={showContinents}
                 onChange={onInputChange}
@@ -76,13 +76,13 @@ export const SearchBox = () => {
             <img src={searchIcon} alt="search-icon" className='absolute top-2 right-2' width={25} />
             {
               showFilter && (
-              <div className='absolute z-[11] top-[85%] cursor-pointer w-full bg-white p-2 border-2 border-x-black border-b-black border-t-transparent border-t-0'>
+              <div className='absolute z-[11] top-[85%] cursor-pointer w-full bg-white p-2 border-2 border-x-[#929292] border-b-[#929292] border-t-transparent border-t-0'>
                 <h3 className='p-2'>Filtrar por continente:</h3>
                 <div className='grid grid-cols-2 gap-2 lg:grid-cols-3 xl:grid-cols-7'>
                 {
                   continents.map((continent) => (
                     <div key={continent.code} 
-                    className={`hover:bg-gray-300 col-span-1 flex flex-col items-center ${continent.code === codeContinent ? "bg-slate-700 hover:bg-slate-700" : ""}`} 
+                    className={`rounded-lg hover:bg-gray-300 col-span-1 flex flex-col items-center ${continent.code === codeContinent ? "bg-blue-900 hover:bg-blue-900 text-white" : ""}`} 
                     onClick={() => selectContinent(continent.code)}>
                       <p className='p-2'>{continent.name}</p>
                       <img src={continent.url} width={60} alt="" />
