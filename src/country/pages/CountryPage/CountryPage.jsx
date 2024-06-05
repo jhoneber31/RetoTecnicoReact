@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import { countryContext } from "../../context/country/countryContext"
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { GET_COUNTRY_BY_CODE } from "../../context/country/CountryProvider";
 import { useQuery } from "@apollo/client";
 
@@ -8,8 +8,9 @@ export const CountryPage = () => {
 
   const { getCountryInfo } = useContext(countryContext);
   const { code } = useParams();
+  const navigate = useNavigate();
 
-  const {data} = useQuery(GET_COUNTRY_BY_CODE, {variables: { codeC: code}})
+  const {data, loading} = useQuery(GET_COUNTRY_BY_CODE, {variables: { codeC: code}})
 
   const [country, setCountry] = useState({});
 
@@ -20,6 +21,9 @@ export const CountryPage = () => {
         setCountry({...data.country, flag, city});
       }
     }
+
+    if(!loading && !data.country) navigate('/');
+
     getCountry();
   }, [data])
     

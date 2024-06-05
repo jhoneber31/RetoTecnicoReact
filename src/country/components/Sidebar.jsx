@@ -16,7 +16,7 @@ export const Sidebar = () => {
             <NavLink
               to="/" 
               className={({isActive}) => isActive ? "p-2 rounded-lg bg-slate-700 group text-white" : "p-2 rounded-lg hover:bg-gray-700 group"}>
-              Por Capital
+              Home
             </NavLink>
           </div>
         </div>

@@ -96,7 +96,7 @@ export const CountryProvider = ({children}) => {
   
 
   return (
-    <countryContext.Provider value={{countriesByCont, getCountryInfo, handleContinet }}>
+    <countryContext.Provider value={{countriesByCont, getCountryInfo, handleContinet, codeContinent}}>
       {children}
     </countryContext.Provider>
   )

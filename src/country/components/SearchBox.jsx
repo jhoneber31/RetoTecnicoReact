@@ -21,7 +21,7 @@ export const SearchBox = () => {
 
   const {handleSidebar} = useContext(sidebarContext);
 
-  const {handleContinet} = useContext(countryContext);
+  const {handleContinet, codeContinent} = useContext(countryContext);
 
   const continents = listContinents()
 
@@ -42,6 +42,11 @@ export const SearchBox = () => {
     setShowFilter(false);
   }
 
+  const selectContinent = (code) => {
+    handleContinet(code);
+    setShowFilter(false);
+  }
+
   useEffect(() => {
     document.addEventListener('click', handleClick);
     return () => {
@@ -49,9 +54,8 @@ export const SearchBox = () => {
     }
   }, [])
   
-
   return (
-    <div className="fixed top-0 w-full lg:left-[16rem] lg:w-[calc(100%-16rem)] bg-white z-40">
+    <div className="fixed top-0 w-full lg:left-[16rem] lg:w-[calc(100%-16rem)] z-40 bg-white shadow-lg">
       <div className="mx-auto container px-[15px] py-[15px]">
         <div className='flex justify-between items-center lg:justify-center'>
           <img src={menuHambuger} alt="menu-hamburger" width={50} className='lg:hidden' onClick={handleSidebar} />
@@ -60,9 +64,11 @@ export const SearchBox = () => {
               <input 
                 name='search'
                 type="text" 
-                className="w-full p-2 text-green-dark placeholder-green-dark rounded-lg border-2 border-[#000] focus:border-green-dark"
+                className="w-full py-2 px-4 text-green-dark placeholder-green-dark rounded-lg border-2 border-[#000] focus:border-green-dark bg-transparent relative z-10"
+                placeholder='Nombre del país'
                 onClick={showContinents}
                 onChange={onInputChange}
+                autoComplete='off'
                 value={search}
               />
               <button className='hidden' type='submit'></button>
@@ -70,15 +76,20 @@ export const SearchBox = () => {
             <img src={searchIcon} alt="search-icon" className='absolute top-2 right-2' width={25} />
             {
               showFilter && (
-              <div className='absolute bottom-[-1] cursor-pointer w-full bg-white p-2 flex gap-2'>
+              <div className='absolute z-[11] top-[85%] cursor-pointer w-full bg-white p-2 border-2 border-x-black border-b-black border-t-transparent border-t-0'>
+                <h3 className='p-2'>Filtrar por continente:</h3>
+                <div className='grid grid-cols-2 gap-2 lg:grid-cols-3 xl:grid-cols-7'>
                 {
                   continents.map((continent) => (
-                    <div key={continent.code} className='hover:bg-gray-300 flex flex-col items-center' onClick={() => handleContinet(continent.code)}>
+                    <div key={continent.code} 
+                    className={`hover:bg-gray-300 col-span-1 flex flex-col items-center ${continent.code === codeContinent ? "bg-slate-700 hover:bg-slate-700" : ""}`} 
+                    onClick={() => selectContinent(continent.code)}>
                       <p className='p-2'>{continent.name}</p>
                       <img src={continent.url} width={60} alt="" />
                     </div>
                   ))
                 }
+                </div>
               </div>
               )
             }

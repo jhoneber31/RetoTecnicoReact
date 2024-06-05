@@ -9,7 +9,7 @@ export const CardCountry = ({...country}) => {
   }
 
   return (
-    <div className="col-span-1 w-full mx-auto" >
+    <div className="col-span-1 w-full mx-auto h-full" >
       <div className='max-w-72 rounded-lg border-2 mx-auto cursor-pointer flex flex-col' onClick={() => handleClick(country.code)}>
         <img src={country.city} alt="picture" className='rounded-t-lg max-h-[172px] bg-cover'/>
         <div className='p-2 flex items-center'>
