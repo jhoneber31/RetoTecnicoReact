@@ -4,7 +4,7 @@ export const listContinents = () => {
     {
       "name": "Africa",
       "code": "AF",
-      "url": "https://pixabay.com/get/g6e516d7d3b622ebf199bd09c0a7aa043cb19998efde2f6f3e03d0332dfb4c2d9d50dfe431362c249fb85be111e1ce947_640.png"
+      "url": "https://pixabay.com/get/ga42801e0f4fc3fcc8b499ea953fb466a768b085ae3a67ed1da6365e9995533190937059124df5e0bd30cf93ed94354f6_640.png"
     },
     {
       "name": "Antarctica",
@@ -14,12 +14,12 @@ export const listContinents = () => {
     {
       "name": "Asia",
       "code": "AS",
-      "url": "https://pixabay.com/get/gc2f807a0c35aaba9f89a3cdfd06bbf1ec4dae77e9d770a61a7280f45376206f8d1756f8d9a5d91e637233d289f32d9f8_640.png"
+      "url": "https://pixabay.com/get/gb28c714ee4ae9e9f3b7f798a9e5ae7610ab88f5081ab5c4361f6673e5f06ef3daa9899fdd554d819dae05a59b6b6c469_640.png"
     },
     {
       "name": "Europe",
       "code": "EU",
-      "url": "https://pixabay.com/get/g399b737c73f5ae9cfabe2919c71114a8231dd4503e4aa425d0fbbff732e0a80e9565782e846a98139789c21e1404fe03_640.png"
+      "url": "https://pixabay.com/get/gda59afb9e4332b4725736367a82956501b94d2b9cf03a37c2288ee0a208f889994cb3f49dd6be0a662aed57d1d777280_640.png"
     },
     {
       "name": "North America",
