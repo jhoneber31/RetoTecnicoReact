@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom"
 import { sidebarContext } from "../context/sidebar/sidebarContext";
+import { countryContext } from "../context/country/countryContext";
 
 export const Sidebar = () => {
   const {valueSidebar, handleSidebar} = useContext(sidebarContext);
+  const {historyCountries} = useContext(countryContext);
 
   if (!valueSidebar) return null;
   return (
@@ -18,6 +20,21 @@ export const Sidebar = () => {
               className={({isActive}) => isActive ? "p-2 rounded-lg bg-slate-700 group text-white" : "p-2 rounded-lg hover:bg-gray-700 group"}>
               Home
             </NavLink>
+            <span className="text-[18px] font-bold p-2">Historial</span>
+            <ul className="px-4 space-y-2">
+              {
+                historyCountries.length > 0 && historyCountries.map((country) => (
+                  <li key={country.code} className="w-full">
+                    <NavLink
+                      to={`/country/${country.code}`}
+                      className={({isActive}) => isActive ? "p-1.5 rounded-lg bg-slate-700 group text-white w-full block " : "p-1.5 rounded-lg   hover:text-white hover:bg-gray-700 group w-full block"}
+                    >
+                      {country.name}
+                    </NavLink>
+                  </li>
+                ))
+              }
+            </ul>
           </div>
         </div>
       </aside>

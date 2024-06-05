@@ -3,6 +3,7 @@ import { countryContext } from "../../context/country/countryContext"
 import { useNavigate, useParams } from "react-router-dom";
 import { GET_COUNTRY_BY_CODE } from "../../context/country/CountryProvider";
 import { useQuery } from "@apollo/client";
+import { Loader } from "../../components/Loader";
 
 export const CountryPage = () => {
 
@@ -13,12 +14,14 @@ export const CountryPage = () => {
   const {data, loading} = useQuery(GET_COUNTRY_BY_CODE, {variables: { codeC: code}})
 
   const [country, setCountry] = useState({});
+  const [loader, setLoader] = useState(true);
 
   useEffect(() => {
     const getCountry =  async () => {
       if( data && data.country) {
         const {flag, city} = await getCountryInfo(data.country.name);
         setCountry({...data.country, flag, city});
+        setLoader(false);
       }
     }
 
@@ -26,6 +29,8 @@ export const CountryPage = () => {
 
     getCountry();
   }, [data])
+
+  if(loader) return <Loader/>
     
   return (
     <section>
