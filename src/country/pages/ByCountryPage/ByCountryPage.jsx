@@ -5,7 +5,7 @@ import {  CardCountry  } from "../../components/CardCountry";
 
 export const ByCountryPage = () => {
 
-  const {countriesByCont} = useContext(countryContext)
+  const {countriesByCont} = useContext(countryContext);
 
   return (
     <section>

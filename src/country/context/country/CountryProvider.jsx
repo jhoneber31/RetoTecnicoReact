@@ -41,7 +41,17 @@ export const GET_COUNTRY_BY_CODE = gql`
     }
   }
 `
-
+export const SEARCH_COUNTRY = gql`
+query SearchCountry($name: String!) {
+  countries(filter: {name: {regex: $name}}) {
+    name
+    code
+    continent {
+      name
+    }
+  }
+}
+`
 // eslint-disable-next-line react/prop-types
 export const CountryProvider = ({children}) => {
 

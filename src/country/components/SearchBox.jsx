@@ -4,10 +4,18 @@ import searchIcon from '../../shared/assets/search-icon.svg';
 import { sidebarContext } from '../context/sidebar/sidebarContext';
 import { listContinents } from '../utils/listContinents';
 import { countryContext } from '../context/country/countryContext';
+import { useForms } from '../../hooks/useForms';
+import { useNavigate } from 'react-router-dom';
 
 export const SearchBox = () => {
 
-  const [showFilter, setShowFilter] = useState(false)
+  const [showFilter, setShowFilter] = useState(false);
+
+  const {onInputChange, search, onReset} = useForms({initialForm: {
+    search: ''
+  }});
+
+  const navigate = useNavigate();
 
   const refInput = useRef(null);
 
@@ -27,6 +35,13 @@ export const SearchBox = () => {
     }
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate(`/search/${search}`)
+    onReset();
+    setShowFilter(false);
+  }
+
   useEffect(() => {
     document.addEventListener('click', handleClick);
     return () => {
@@ -35,18 +50,23 @@ export const SearchBox = () => {
   }, [])
   
 
-
   return (
     <div className="fixed top-0 w-full lg:left-[16rem] lg:w-[calc(100%-16rem)] bg-white z-40">
       <div className="mx-auto container px-[15px] py-[15px]">
         <div className='flex justify-between items-center lg:justify-center'>
           <img src={menuHambuger} alt="menu-hamburger" width={50} className='lg:hidden' onClick={handleSidebar} />
           <div className='relative w-[80%]' ref={refInput}>
-            <input 
-              type="text" 
-              className="w-full p-2 text-green-dark placeholder-green-dark rounded-lg border-2 border-[#000] focus:border-green-dark"
-              onClick={showContinents}
-            />
+            <form onSubmit={handleSubmit}>
+              <input 
+                name='search'
+                type="text" 
+                className="w-full p-2 text-green-dark placeholder-green-dark rounded-lg border-2 border-[#000] focus:border-green-dark"
+                onClick={showContinents}
+                onChange={onInputChange}
+                value={search}
+              />
+              <button className='hidden' type='submit'></button>
+            </form>
             <img src={searchIcon} alt="search-icon" className='absolute top-2 right-2' width={25} />
             {
               showFilter && (
