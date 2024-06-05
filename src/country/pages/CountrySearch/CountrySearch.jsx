@@ -1,11 +1,23 @@
 import { useParams } from "react-router-dom"
 import { CardCountry } from "../../components/CardCountry"
-import { SEARCH_COUNTRY } from "../../context/country/CountryProvider";
 import { useContext, useEffect, useState } from "react";
-import { countryContext } from "../../context/country/countryContext";
-import { useQuery } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import { Loader } from "../../components";
 import { CountryNotFound } from "../../components/CountryNotFound";
+import { getImageByName } from "../../../hooks/getImageByName";
+import { countryContext } from "../../context/country/countryContext";
+
+const SEARCH_COUNTRY = gql`
+query SearchCountry($name: String!) {
+  countries(filter: {name: {regex: $name}}) {
+    name
+    code
+    continent {
+      name
+    }
+  }
+}
+`
 
 export const CountrySearch = () => {
 
@@ -14,7 +26,9 @@ export const CountrySearch = () => {
 
   const {value} = useParams();
 
-  const {getCountryInfo} = useContext(countryContext);
+  const { getCountryInfo } = getImageByName();
+
+  const { handleContinet } = useContext(countryContext);
 
   const searchValue = value.charAt(0).toUpperCase() + value.slice(1);
 
@@ -22,6 +36,7 @@ export const CountrySearch = () => {
 
   useEffect(() => {
     const getCountry = async () =>{
+      handleContinet('');
       if(data && data.countries) {
         const promise = data.countries.map(async(country) => {
           const {flag, city} = await getCountryInfo(country.name);

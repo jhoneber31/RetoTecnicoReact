@@ -1,11 +1,15 @@
 import { useContext } from "react";
 import { countryContext } from "../../context/country/countryContext.js";
 import {  CardCountry  } from "../../components/CardCountry";
+import { Loader } from "../../components/Loader.jsx";
 
 
 export const ByCountryPage = () => {
 
-  const {countriesByCont} = useContext(countryContext);
+  const {countriesByCont, loaderGetCountries} = useContext(countryContext);
+
+  if(loaderGetCountries) return <Loader/>
+
 
   return (
     <section>

@@ -9,7 +9,7 @@ export const listContinents = () => {
     {
       "name": "Antarctica",
       "code": "AN",
-      "url": "https://pixabay.com/get/g4a5c548d5ffd069e62fece43a5c3af11853a911470bcb15a6765b2686e5c2052b50f7662c56bd45cee8b50a35523ea7c_640.png"
+      "url": "/src/shared/assets/antartica.png"
     },
     {
       "name": "Asia",

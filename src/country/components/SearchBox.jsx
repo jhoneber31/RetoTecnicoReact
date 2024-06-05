@@ -45,6 +45,7 @@ export const SearchBox = () => {
   const selectContinent = (code) => {
     handleContinet(code);
     setShowFilter(false);
+    navigate('/');
   }
 
   useEffect(() => {
@@ -55,7 +56,7 @@ export const SearchBox = () => {
   }, [])
   
   return (
-    <div className="fixed top-0 w-full lg:left-[16rem] lg:w-[calc(100%-16rem)] z-40 bg-white shadow-lg">
+    <div className="fixed top-0 w-full lg:left-[18rem] lg:w-[calc(100%-18rem)] z-40 bg-white shadow-lg">
       <div className="mx-auto container px-[15px] py-[15px]">
         <div className='flex justify-between items-center lg:justify-center'>
           <img src={menuHambuger} alt="menu-hamburger" width={50} className='lg:hidden' onClick={handleSidebar} />
@@ -65,7 +66,7 @@ export const SearchBox = () => {
                 name='search'
                 type="text" 
                 className="w-full py-2 px-4 text-green-dark placeholder-green-dark rounded-lg border-2 border-[#929292] focus:border-[#929292] bg-transparent relative z-10 focus-visible:border-[#929292]"
-                placeholder='Nombre del país'
+                placeholder='Country name'
                 onClick={showContinents}
                 onChange={onInputChange}
                 autoComplete='off'
@@ -77,7 +78,7 @@ export const SearchBox = () => {
             {
               showFilter && (
               <div className='absolute z-[11] top-[85%] cursor-pointer w-full bg-white p-2 border-2 border-x-[#929292] border-b-[#929292] border-t-transparent border-t-0'>
-                <h3 className='p-2'>Filtrar por continente:</h3>
+                <h3 className='p-2'>Filter by continent</h3>
                 <div className='grid grid-cols-2 gap-2 lg:grid-cols-3 xl:grid-cols-7'>
                 {
                   continents.map((continent) => (

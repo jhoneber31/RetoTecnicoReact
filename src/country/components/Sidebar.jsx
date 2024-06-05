@@ -4,6 +4,7 @@ import { sidebarContext } from "../context/sidebar/sidebarContext";
 import { countryContext } from "../context/country/countryContext";
 import homeIcon from "../../shared/assets/home-icon.svg";
 import historyIcon from "../../shared/assets/history-icon.svg";
+import worldIcon from "../../shared/assets/world-globe-icon.svg";
 
 export const Sidebar = () => {
   const {valueSidebar, handleSidebar} = useContext(sidebarContext);
@@ -16,7 +17,10 @@ export const Sidebar = () => {
       <aside className="fixed top-0 left-0 z-50 w-72 h-screen transition-transform bg-[#1C274C] animate__animated animate__slideInLeft">
         <div className="h-full px-3 py-4 overflow-y-auto text-white">
           <div className="flex flex-col">
-            <h3 className="text-[25px] w-full font-bold px-2 pb-4 relative border-b-2 mb-4">Country App</h3>
+            <div className="flex px-2 pb-4 border-b-2 mb-4 items-center">
+              <img src={worldIcon} alt="world-icon" width={60} />
+              <h3 className="text-[25px] w-full font-bold">COUNTRY APP</h3>
+            </div>
             <NavLink
               to="/" 
               className={({isActive}) => isActive ? "p-2 rounded-lg bg-slate-700 group text-white flex" : "p-2 rounded-lg hover:bg-gray-700 group flex"}>
@@ -26,7 +30,7 @@ export const Sidebar = () => {
             <div className="flex p-2">
               <img src={historyIcon} width={25} alt="" />
               <span className="text-[20px] ml-5">
-                Historial
+                Search history
               </span>
             </div>
             <ul className="pl-14 pr-3 space-y-2">

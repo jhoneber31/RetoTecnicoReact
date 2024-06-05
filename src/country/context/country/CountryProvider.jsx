@@ -15,72 +15,31 @@ const GET_COUNTRIES_BY_CONTINENT = gql`
   }
 `
 
-export const GET_COUNTRY_BY_CODE = gql`
-  query GetCountryByCode($codeC: ID!) {
-    country(code: $codeC) {
-      name
-      capital
-      code
-      continent {
-        name
-      }
-      currencies
-      phone
-      native
-      awsRegion
-      languages{
-        name
-      }
-      states{
-        name
-      }
-      subdivisions {
-        name
-      }
-    }
-  }
-`
-export const SEARCH_COUNTRY = gql`
-query SearchCountry($name: String!) {
-  countries(filter: {name: {regex: $name}}) {
-    name
-    code
-    continent {
-      name
-    }
-  }
-}
-`
-// eslint-disable-next-line react/prop-types
 export const CountryProvider = ({children}) => {
 
-  const [codeContinent, setCodeContinent] = useState("SA");
+  const [codeContinent, setCodeContinent] = useState("EU");
   const [countriesByCont, setCountriesByCont] = useState([]);
-  const [historyCountries, setHistoryCountries] = useState([])
+  const [historyCountries, setHistoryCountries] = useState([]);
+  const [loaderGetCountries, setLoaderGetCountries] = useState(true);
 
   const resultCountries = useQuery(GET_COUNTRIES_BY_CONTINENT, { variables: {codeContinent}});
 
   const { getFlagByName, getImageCityByName } = getImageByName();
 
   const getCountries = async () => {
+    setLoaderGetCountries(true);
+    if(codeContinent === '') setCodeContinent('EU');
     const {data} = resultCountries;
-    if (data) {
+    if (data && data.countries.length > 0) {
       const promise = data.countries.map(async(country) => {
-        const flag = await getFlagByName(country.name);
-        const city = await getImageCityByName(country.name);
-        return {...country, flag, city}
+      const flag = await getFlagByName(country.name);
+      const city = await getImageCityByName(country.name);
+      return {...country, flag, city}
       });
       const results = await Promise.all(promise);
-      console.log("resultados",results)
       setCountriesByCont(results);
+      setLoaderGetCountries(false);
     }
-  }
-
-  const getCountryInfo =async(name) => {
-    const flag = await getFlagByName(name);
-    const city = await getImageCityByName(name);
-    const result = {flag, city}
-    return result;
   }
 
   const handleContinet = (code) => {
@@ -109,7 +68,7 @@ export const CountryProvider = ({children}) => {
   }, [])
   
   return (
-    <countryContext.Provider value={{countriesByCont, getCountryInfo, handleContinet, codeContinent, historyCountries, updateHistory}}>
+    <countryContext.Provider value={{countriesByCont, handleContinet, codeContinent, historyCountries, updateHistory, loaderGetCountries}}>
       {children}
     </countryContext.Provider>
   )
